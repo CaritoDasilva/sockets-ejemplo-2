@@ -9,9 +9,8 @@ var Client = /** @class */ (function () {
             console.log('desconectado desde el servidor');
         });
         //Emit son los que emiten eventos al servidor pero 1:1
-        this.socket.emit('chat', {
-            user: 'CaritoNegra',
-            profesion: 'developer'
+        this.socket.emit('sendMsg', function (message) {
+            console.log(message);
         });
     }
     return Client;

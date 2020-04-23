@@ -2,10 +2,11 @@ import express from 'express'
 import http from 'http'
 import path from 'path'
 import socketIO from 'socket.io'
+import { TicketControl } from './classes/ticket-control';
 const port: number = 8000
 
 export default class Server {
-
+    private ticketControl: TicketControl
     private server: http.Server
     public app: express.Application
     private port: number
@@ -15,6 +16,7 @@ export default class Server {
         this.port = port
         this.app = express()        
         this.server = http.createServer(this.app)
+        this.ticketControl = new TicketControl()
 
     }
 
@@ -37,6 +39,11 @@ export default class Server {
             socket.on('chat', (message) => {
                 console.log(message)
             }) 
+            socket.on('sendMsg', (message, callback) =>{
+                console.log(message)
+                // socket.broadcast.emit('sendMsg', message)
+                // message.user ? callback({res: 'Todo salió bien'}) : callback({res: 'Todo salió muy mal'})
+            })
         });
         this.server.listen(this.port);
         console.log(`Server listening on port ${this.port}`);

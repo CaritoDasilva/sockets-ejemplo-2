@@ -13,10 +13,10 @@ class Client{
         })
 
         //Emit son los que emiten eventos al servidor pero 1:1
-        this.socket.emit('chat',   {
-            user: 'CaritoNegra',
-            profesion: 'developer'
+        this.socket.emit('sendMsg', (message) => {
+            console.log(message)
         })
+
     }
 }
 
